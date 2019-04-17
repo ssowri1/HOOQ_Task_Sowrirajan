@@ -14,9 +14,10 @@ class VideoListingViewController: ParentViewController {
     @IBOutlet weak var tabelView: UITableView!
     /// Use to store offset values
     var storedOffsets = [Int: CGFloat]()
+    @IBOutlet var videoDataSource: VideoListDataSource!
     var timer = Timer()
     var offSet: CGFloat = 0
-    var feeds = [CSVideoFeeds]()
+    var feeds = [VideoFeeds]()
     var selecedIndex: Int?
     private let bannerImages = ["Banner1", "Banner2", "Banner3", "Banner4"]
     /// view life cycle methods
@@ -24,32 +25,17 @@ class VideoListingViewController: ParentViewController {
         super.viewDidLoad()
         scrollView.contentSize = CGSize(width: bannerImages.count * Int(self.view.frame.size.width), height: 0)
         callApi()
+        configureVideoListTableView()
     }
     override func callApi() {
         self.getFeeds()
     }
     func getFeeds() {
-        let param: [String: Any] = [
-            "header": "vuliv_mp_an Dalvik/2.1.0 (Linux; U; Android 8.0.0; SM-J600G Build/R16NW)",
-            "ip_address": "10.42.0.164",
-            "os_version_code": "26",
-            "os_version_name": "8.0.0",
-            "page": "1",
-            "_interface": "AN",
-            "deviceId": "358461096297447",
-            "model": "SAMSUNGSM-J600G",
-            "package": "com.player",
-            "region": "in",
-            "uid": "358461096297447",
-            "version": "5.0.2",
-            "versionCode": "28"
-        ]
         CSVideoListModel.getVideoFeeds(parent: self,
-                                       parameters: param) { (response) in
-                                        self.feeds = response.feed.filter { $0.title != "Sponsored" }
+                                       parameters: [:]) { (response) in
+                                        self.feeds = response.results
                                         DispatchQueue.main.async {
-                                            self.tabelView.reloadData()
-                                            self.stopAnimate()
+                                            self.configureVideoListTableView()
                                         }
         }
     }
@@ -62,6 +48,11 @@ class VideoListingViewController: ParentViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    func configureVideoListTableView() {
+        videoDataSource.delegate = self
+        videoDataSource.videoLists = self.feeds
+        self.tabelView.reloadData()
     }
     func allocateScrollView() {
         for (index, item) in bannerImages.enumerated() {
@@ -94,78 +85,26 @@ class VideoListingViewController: ParentViewController {
             }, completion: nil)
         }
     }
+    /// Custom methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is VideoDetailViewController {
+            let tag = sender as? Int
+            let feed = feeds[tag!]
+            let controller = segue.destination as? VideoDetailViewController
+            controller?.movieeTitle = feed.title ?? "sdscsd"
+            controller?.posterPath = feed.poster_path
+            controller?.movieeDescription = feed.overview
+            controller?.year = feed.release_date
+            controller?.rating = feed.rating
+            controller?.videoId = feed.videoId
+        }
+    }
     deinit {
         print("CSListingViewController is deallocated")
     }
 }
-
-// MARK: TableView delegate functions
-extension VideoListingViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+extension VideoListingViewController: ParentTableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "listtodetail", sender: indexPath.row)
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.feeds.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "videolistcell", for: indexPath) as? CSVideoListTableViewCell else {
-            return UITableViewCell()
-        }
-        cell.title.text = self.feeds[indexPath.row].title
-        return cell
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let tableViewCell = cell as? CSVideoListTableViewCell else { return }
-        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
-        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
-    }
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let tablewViewCell = cell as? CSVideoListTableViewCell else { return }
-        storedOffsets[indexPath.row] = tablewViewCell.collectionViewOffset
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-}
-// MARK: CollectionView delegate functions
-extension VideoListingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return feeds[collectionView.tag].list.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionviewcell",
-                                                            for: indexPath) as? VideosCollectionViewCell else {
-                                                                return UICollectionViewCell()
-        }
-        let videos = self.feeds[collectionView.tag].list
-        cell.title.text = videos[indexPath.row].title
-        let iconUrl = videos[indexPath.row].image ?? ""
-        let placeholderImage = UIImage(named: "videoPlaceHolder")!
-        if let url = URL(string: iconUrl) {
-            cell.thumbnailImageView.sd_setImage(with: url, placeholderImage: placeholderImage, options: .transformAnimatedImage, completed: nil)
-        }
-        cell.cellDisplayAnimation()
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let viewWidth = WIDTH/2
-        return CGSize(width: viewWidth, height: 120)
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selecedIndex = indexPath.row
-        performSegue(withIdentifier: "feedtofeeddetail", sender: collectionView.tag)
-    }
-//    /// Custom methods
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.destination is VideoDetailViewController {
-//            let tag = sender as? Int
-//            let controller = segue.destination as? VideoDetailViewController
-//            controller?.videoLists = feeds[tag!].list
-//            controller?.selecedIndex = selecedIndex
-//        }
-//    }
 }

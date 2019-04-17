@@ -9,58 +9,47 @@
  */
 import UIKit
 import ObjectMapper
-class CSVideoFeedListApiModel: Mappable {
-    var statusCode: String!
-    var feed = [CSVideoFeeds]()
-    var content = [CSVideoDetails]()
+class VideoFeedListApiModel: Mappable {
+    var results = [VideoFeeds]()
+    var page: Int!
+    var total_results: Int!
+    var dates: VideoDates?
+    var total_pages = [CSVideoDetails]()
     required init?(map: Map) {
     }
     func mapping(map: Map) {
-        statusCode <- map["status"]
-        feed <- map["feed"]
-        content <- map["content"]
+        results <- map["results"]
+        page <- map["page"]
+        total_results <- map["total_results"]
+        dates <- map["dates"]
+        total_pages <- map["total_pages"]
     }
 }
-class CSVideoFeeds: Mappable {
-    var title: String!
-    var list = [CSVideoLists]()
+class VideoDates: Mappable {
+    var minimum: String!
+    var maximum: String!
     required init?(map: Map) {
     }
     func mapping(map: Map) {
-        title <- map["title"]
-        list <- map["list"]
+        minimum <- map["minimum"]
+        maximum <- map["maximum"]
     }
 }
-class CSVideoLists: Mappable {
+class VideoFeeds: Mappable {
     var title: String?
-    var videoId: String?
-    var type: String?
-    var icon: String?
-    var image: String?
+    var videoId: Int?
+    var overview: String?
+    var poster_path: String?
+    var release_date: String?
+    var rating: Int?
     required init?(map: Map) {
     }
     func mapping(map: Map) {
         title <- map["title"]
         videoId <- map["id"]
-        type <- map["type"]
-        icon <- map["icon"]
-        image <- map["image"]
-    }
-}
-/// Video details api model
-class CSVideoDetails: Mappable {
-    var channelname: String?
-    var thumbnail: String?
-    var videoName: String?
-    var videoUrl: String?
-    var shareUrl: String?
-    required init?(map: Map) {
-    }
-    func mapping(map: Map) {
-        channelname <- map["channelname"]
-        thumbnail <- map["thumbnail"]
-        videoName <- map["videoName"]
-        videoUrl <- map["videoUrl"]
-        shareUrl <- map["share_url"]
+        overview <- map["overview"]
+        poster_path <- map["poster_path"]
+        release_date <- map["release_date"]
+        vote_average <- map["vote_average"]
     }
 }

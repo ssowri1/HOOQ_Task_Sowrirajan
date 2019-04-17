@@ -17,23 +17,22 @@ class CSVideoListModel: NSObject {
     //   - parameters
     class func getVideoFeeds(parent: AnyObject,
                              parameters: [String: Any],
-                             completionHandler: @escaping (_ response: CSVideoFeedListApiModel) -> Void) {
+                             completionHandler: @escaping (_ response: VideoFeedListApiModel) -> Void) {
         let parentViewController = parent as? ParentViewController
         parentViewController?.startAnimate()
-        let path = FEEDS
-        apiOwner = Api.vuliv
-        CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .post,
+        let path = "movie/now_playing?api_key=2a05877de88d08b90c4fed3cf806ca35"
+        CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .get,
                                                                  path: path, parameters: parameters,
                                                                  completionHandler: { (response) in
                                                                     parentViewController?.stopAnimate()
                                                                     let content = String(data: (response as? Data)!, encoding: String.Encoding.utf8)
                                                                     // call the object mapper
-                                                                    let responseData = Mapper<CSVideoFeedListApiModel>().map(JSONString: content!)
-                                                                    if responseData?.statusCode == "200" {
+                                                                    let responseData = Mapper<VideoFeedListApiModel>().map(JSONString: content!)
+                                                                    if responseData != nil {
                                                                         completionHandler(responseData!)
                                                                     } else {
                                                                         parentViewController?.showAlertWithTitle(title: "Oops!",
-                                                                                                                 message: responseData?.statusCode)
+                                                                                                                 message: "Something went wrong")
                                                                     }
         }, errorOccured: { errorOccured in
             parentViewController?.showAlertWithTitle(title: "Oops!", message: errorOccured?.localizedDescription)
@@ -45,25 +44,24 @@ class CSVideoListModel: NSObject {
     // - Parameters:
     //   - parentView: Any object
     //   - parameters
-    class func getVideodetails(parent: AnyObject,
+    class func getSimilarVideodetails(parent: AnyObject,
                                parameters: [String: Any],
-                               completionHandler: @escaping (_ response: CSVideoFeedListApiModel) -> Void) {
+                               completionHandler: @escaping (_ response: VideoFeedListApiModel) -> Void) {
         let parentViewController = parent as? ParentViewController
         parentViewController?.startAnimate()
-        let path = FEEDID
-        apiOwner = Api.vuliv
+        let path = VIDEODETAIL
         CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .post,
                                                                  path: path, parameters: parameters,
                                                                  completionHandler: { (response) in
                                                                     parentViewController?.stopAnimate()
                                                                     let content = String(data: (response as? Data)!, encoding: String.Encoding.utf8)
                                                                     // call the object mapper
-                                                                    let responseData = Mapper<CSVideoFeedListApiModel>().map(JSONString: content!)
-                                                                    if responseData?.statusCode == "200" {
+                                                                    let responseData = Mapper<VideoFeedListApiModel>().map(JSONString: content!)
+                                                                    if responseData != nil {
                                                                         completionHandler(responseData!)
                                                                     } else {
                                                                         parentViewController?.showAlertWithTitle(title: "Oops!",
-                                                                                                                 message: responseData?.statusCode)
+                                                                                                                 message: "Something went wrong")
                                                                     }
         }, errorOccured: { errorOccured in
             parentViewController?.showAlertWithTitle(title: "Oops!", message: errorOccured?.localizedDescription)

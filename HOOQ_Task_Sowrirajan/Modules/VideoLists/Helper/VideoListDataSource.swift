@@ -9,25 +9,24 @@
  */
 import UIKit
 import SDWebImage
-class CSVideoDetailDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
-    var videoLists: [CSVideoLists]?
+class VideoListDataSource: NSObject, UITableViewDelegate, UITableViewDataSource {
+    var videoLists = [VideoFeeds]()
     weak var delegate: ParentTableViewDelegate?
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videoLists?.count ?? 0
+        return 12
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? VideoDetailTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "videolistcell", for: indexPath) as? VideoListTableViewCell else {
             return UITableViewCell()
         }
-        let video = videoLists![indexPath.row]
-        let url = URL(string: video.image ?? "")
-        let placeholderImage = UIImage(named: "videoPlaceHolder")!
-//        cell.logoView?.af_setImage(withURL: url!, placeholderImage: placeholderImage)
-        cell.logoView.sd_setImage(with: url!, placeholderImage: placeholderImage, options: .transformAnimatedImage, completed: nil)
-        cell.title?.text = video.title
+//        let video = videoLists[indexPath.row]
+//        let url = URL(string: video.image ?? "")
+//        let placeholderImage = UIImage(named: "videoPlaceHolder")!
+//        cell.logoView.sd_setImage(with: url!, placeholderImage: placeholderImage, options: .transformAnimatedImage, completed: nil)
+        cell.title?.text = "video.title"
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

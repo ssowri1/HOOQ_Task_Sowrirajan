@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE21B9892266FB1E00FDF190 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B9882266FB1E00FDF190 /* VideoDetailViewController.swift */; };
+		CE21B990226701B300FDF190 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21B98F226701B300FDF190 /* Segue.swift */; };
 		CE869FE12265E38D00792F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE869FE02265E38D00792F4F /* AppDelegate.swift */; };
 		CE869FE32265E38D00792F4F /* VideoListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE869FE22265E38D00792F4F /* VideoListingViewController.swift */; };
 		CE869FE62265E38D00792F4F /* Videos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE869FE42265E38D00792F4F /* Videos.storyboard */; };
@@ -14,9 +16,7 @@
 		CE869FEB2265E38F00792F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE869FEA2265E38F00792F4F /* Assets.xcassets */; };
 		CE869FEE2265E38F00792F4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE869FEC2265E38F00792F4F /* LaunchScreen.storyboard */; };
 		CE869FF92266099F00792F4F /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE869FF82266099F00792F4F /* ParentViewController.swift */; };
-		CE869FFF22660AF400792F4F /* VideoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE869FFE22660AF400792F4F /* VideoListTableViewCell.swift */; };
-		CE86A00122660B2100792F4F /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00022660B2100792F4F /* VideoCollectionViewCell.swift */; };
-		CE86A00322660B3C00792F4F /* VideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00222660B3C00792F4F /* VideoDataSource.swift */; };
+		CE86A00322660B3C00792F4F /* VideoListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00222660B3C00792F4F /* VideoListDataSource.swift */; };
 		CE86A00622660B9200792F4F /* VideoListApiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00522660B9200792F4F /* VideoListApiModel.swift */; };
 		CE86A00822660BAB00792F4F /* VideoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00722660BAB00792F4F /* VideoListModel.swift */; };
 		CE86A00B22660BFC00792F4F /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A00A22660BFC00792F4F /* HttpRequest.swift */; };
@@ -27,13 +27,15 @@
 		CE86A01B22661C1F00792F4F /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A01A22661C1F00792F4F /* Loader.swift */; };
 		CE86A01E22661C6300792F4F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A01D22661C6300792F4F /* UIView.swift */; };
 		CE86A02022661D7400792F4F /* Loader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE86A01F22661CF600792F4F /* Loader.xib */; };
-		CE86A022226620B500792F4F /* VideoDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A021226620B500792F4F /* VideoDetailTableViewCell.swift */; };
+		CE86A022226620B500792F4F /* VideoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86A021226620B500792F4F /* VideoListTableViewCell.swift */; };
 		ED58E628B634340109399F2E /* Pods_HOOQ_Task_Sowrirajan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF4638E82B5B5FC883AB30F /* Pods_HOOQ_Task_Sowrirajan.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		41BE067FA4EDDAA1F9B75761 /* Pods-HOOQ_Task_Sowrirajan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HOOQ_Task_Sowrirajan.release.xcconfig"; path = "Pods/Target Support Files/Pods-HOOQ_Task_Sowrirajan/Pods-HOOQ_Task_Sowrirajan.release.xcconfig"; sourceTree = "<group>"; };
 		863C0305005252C5EBDA648D /* Pods-HOOQ_Task_Sowrirajan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HOOQ_Task_Sowrirajan.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HOOQ_Task_Sowrirajan/Pods-HOOQ_Task_Sowrirajan.debug.xcconfig"; sourceTree = "<group>"; };
+		CE21B9882266FB1E00FDF190 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		CE21B98F226701B300FDF190 /* Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		CE869FDD2265E38D00792F4F /* HOOQ_Task_Sowrirajan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HOOQ_Task_Sowrirajan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE869FE02265E38D00792F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE869FE22265E38D00792F4F /* VideoListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListingViewController.swift; sourceTree = "<group>"; };
@@ -43,9 +45,7 @@
 		CE869FED2265E38F00792F4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE869FEF2265E38F00792F4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE869FF82266099F00792F4F /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
-		CE869FFE22660AF400792F4F /* VideoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListTableViewCell.swift; sourceTree = "<group>"; };
-		CE86A00022660B2100792F4F /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
-		CE86A00222660B3C00792F4F /* VideoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataSource.swift; sourceTree = "<group>"; };
+		CE86A00222660B3C00792F4F /* VideoListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListDataSource.swift; sourceTree = "<group>"; };
 		CE86A00522660B9200792F4F /* VideoListApiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListApiModel.swift; sourceTree = "<group>"; };
 		CE86A00722660BAB00792F4F /* VideoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListModel.swift; sourceTree = "<group>"; };
 		CE86A00A22660BFC00792F4F /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		CE86A01A22661C1F00792F4F /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		CE86A01D22661C6300792F4F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		CE86A01F22661CF600792F4F /* Loader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loader.xib; sourceTree = "<group>"; };
-		CE86A021226620B500792F4F /* VideoDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailTableViewCell.swift; sourceTree = "<group>"; };
+		CE86A021226620B500792F4F /* VideoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListTableViewCell.swift; sourceTree = "<group>"; };
 		DAF4638E82B5B5FC883AB30F /* Pods_HOOQ_Task_Sowrirajan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HOOQ_Task_Sowrirajan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +87,30 @@
 				DAF4638E82B5B5FC883AB30F /* Pods_HOOQ_Task_Sowrirajan.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE21B9872266FAFC00FDF190 /* VideoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CE21B98A2266FB2200FDF190 /* Controller */,
+			);
+			path = VideoDetail;
+			sourceTree = "<group>";
+		};
+		CE21B98A2266FB2200FDF190 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE21B9882266FB1E00FDF190 /* VideoDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CE21B98E226701A600FDF190 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				CE21B98F226701B300FDF190 /* Segue.swift */,
+			);
+			path = Segue;
 			sourceTree = "<group>";
 		};
 		CE869FD42265E38D00792F4F = {
@@ -134,6 +158,7 @@
 		CE869FF62266096300792F4F /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				CE21B98E226701A600FDF190 /* Segue */,
 				CE86A01C22661C5800792F4F /* UIView */,
 				CE86A01922661C1200792F4F /* Loader */,
 				CE86A0162266178C00792F4F /* UICollectionViewCell */,
@@ -166,6 +191,7 @@
 		CE869FFB226609C600792F4F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE21B9872266FAFC00FDF190 /* VideoDetail */,
 				CE869FF72266096B00792F4F /* VideoLists */,
 			);
 			path = Modules;
@@ -174,9 +200,7 @@
 		CE869FFC22660ACA00792F4F /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				CE869FFE22660AF400792F4F /* VideoListTableViewCell.swift */,
-				CE86A00022660B2100792F4F /* VideoCollectionViewCell.swift */,
-				CE86A00222660B3C00792F4F /* VideoDataSource.swift */,
+				CE86A00222660B3C00792F4F /* VideoListDataSource.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -194,7 +218,7 @@
 			children = (
 				CE86A00522660B9200792F4F /* VideoListApiModel.swift */,
 				CE86A00722660BAB00792F4F /* VideoListModel.swift */,
-				CE86A021226620B500792F4F /* VideoDetailTableViewCell.swift */,
+				CE86A021226620B500792F4F /* VideoListTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -389,22 +413,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE86A022226620B500792F4F /* VideoDetailTableViewCell.swift in Sources */,
+				CE86A022226620B500792F4F /* VideoListTableViewCell.swift in Sources */,
 				CE86A01E22661C6300792F4F /* UIView.swift in Sources */,
 				CE86A00622660B9200792F4F /* VideoListApiModel.swift in Sources */,
 				CE86A015226616F600792F4F /* TableViewDelegate.swift in Sources */,
 				CE86A018226617AC00792F4F /* ParentCollectionViewCell.swift in Sources */,
 				CE86A00B22660BFC00792F4F /* HttpRequest.swift in Sources */,
-				CE86A00122660B2100792F4F /* VideoCollectionViewCell.swift in Sources */,
 				CE86A00F226615DB00792F4F /* AppConstants.swift in Sources */,
+				CE21B990226701B300FDF190 /* Segue.swift in Sources */,
 				CE869FE92265E38D00792F4F /* HOOQ_Task_Sowrirajan.xcdatamodeld in Sources */,
 				CE869FE32265E38D00792F4F /* VideoListingViewController.swift in Sources */,
 				CE869FF92266099F00792F4F /* ParentViewController.swift in Sources */,
+				CE21B9892266FB1E00FDF190 /* VideoDetailViewController.swift in Sources */,
 				CE86A00822660BAB00792F4F /* VideoListModel.swift in Sources */,
 				CE869FE12265E38D00792F4F /* AppDelegate.swift in Sources */,
 				CE86A0122266163500792F4F /* ParentTableViewCell.swift in Sources */,
-				CE869FFF22660AF400792F4F /* VideoListTableViewCell.swift in Sources */,
-				CE86A00322660B3C00792F4F /* VideoDataSource.swift in Sources */,
+				CE86A00322660B3C00792F4F /* VideoListDataSource.swift in Sources */,
 				CE86A01B22661C1F00792F4F /* Loader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
