@@ -8,9 +8,10 @@
  * @copyright  Copyright (C) 2019 Contus. All rights reserved.
  */
 import UIKit
-class VideoDetailTableViewCell: ParentTableViewCell {
-    @IBOutlet weak var logoView: UIImageView!
+class VideoListTableViewCell: ParentTableViewCell {
+    @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var overView: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

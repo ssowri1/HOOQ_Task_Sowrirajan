@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Controller/VideoListingViewController.swift"
-            timestampString = "577120625.319116"
+            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Helper/VideoDataSource.swift"
+            timestampString = "577176949.754884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "getFeeds()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Model/VideoListModel.swift"
-            timestampString = "577120625.319207"
+            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Helper/VideoDataSource.swift"
+            timestampString = "577176949.754964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "getVideoFeeds(parent:parameters:completionHandler:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,61 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Model/VideoListModel.swift"
-            timestampString = "577120625.31928"
+            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoDetail/Controller/VideoDetailViewController.swift"
+            timestampString = "577191422.212732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "getVideoFeeds(parent:parameters:completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Modules/VideoLists/Model/VideoListModel.swift"
-            timestampString = "577120625.319347"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "getVideoFeeds(parent:parameters:completionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Helper/httpRequest/HttpRequest.swift"
-            timestampString = "577120625.319416"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "javaUrlRequestPost(httpMethod:path:parameterSet:cache:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HOOQ_Task_Sowrirajan/Helper/httpRequest/HttpRequest.swift"
-            timestampString = "577120625.3194799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "javaUrlRequestPost(httpMethod:path:parameterSet:cache:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "getVideoDetail(videoId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

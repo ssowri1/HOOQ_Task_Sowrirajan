@@ -11,9 +11,12 @@ import UIKit
 
 let WIDTH = UIScreen.main.bounds.size.width
 let HEIGHT = UIScreen.main.bounds.size.height
+let apiKey = "api_key=2a05877de88d08b90c4fed3cf806ca35"
 
-let BASEURL = "http://dicvbus.dev.contus.us"
+let BASEURL = "https://api.themoviedb.org/3/"
 
-let BASEVULIV = "https://api.vuliv.com/theapp/webapi"
-let FEEDS = BASEVULIV + "/feed"
-let FEEDID = BASEVULIV + "/feed/id"
+let NOWPLAYING = BASEURL + "movie/now_playing?" + apiKey
+let VIDEODETAIL = BASEURL + "movie/" + "287947" + "/similar" + apiKey
+
+
+

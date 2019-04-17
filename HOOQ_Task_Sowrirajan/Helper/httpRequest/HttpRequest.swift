@@ -9,10 +9,6 @@
  */
 import UIKit
 import Alamofire
-enum Api {
-    case contus, vuliv
-}
-var apiOwner = Api.contus
 class CSApiHttpRequest: NSObject {
     // MARK: Shared Instance
     static let sharedInstance: CSApiHttpRequest = {
@@ -138,29 +134,7 @@ class CSApiHttpRequest: NSObject {
             request.validate(statusCode: 200..<500)
             request.responseJSON { response in
                 // Setting network activity Indicator to hide
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                switch response.result {
-                case .success :
-                    if response.result.value != nil {
-                        // send to completion block
-                        completionHandler(response.data as AnyObject? ?? NSData())
-                    }
-                case .failure(let error):
-                    // sending to failure block
-                    print("Error get")
-                    errorOccured(error as NSError?)
-                }
-            }
-        } else if httpMethod == .post {
-            let urlRequest  = self.javaUrlRequestPost(httpMethod: httpMethod,
-                                                      path: path,
-                                                      parameterSet: parameters,
-                                                      cache: isCache)
-            let request = manager.request(urlRequest)
-            request.validate(statusCode: 200..<500)
-            request.responseJSON { response in
-                // Setting network activity Indicator to hide
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 switch response.result {
                 case .success :
                     if response.result.value != nil {
@@ -213,12 +187,7 @@ class CSApiHttpRequest: NSObject {
             //                parameters = parameterSet
             //            }
             let baseUrl: String!
-            if apiOwner == .contus {
-                baseUrl = BASEURL + path
-            } else {
-                baseUrl = path
-            }
-            apiOwner = Api.contus
+            baseUrl = BASEURL + path
             debugPrint("API ==>> ", baseUrl)
             let url = URL(string: baseUrl)!
             var urlRequest: URLRequest!
@@ -236,98 +205,5 @@ class CSApiHttpRequest: NSObject {
             urlRequest.allHTTPHeaderFields = self.httpHeader(path: path)
             urlRequest.httpBody = postData as Data
             return urlRequest
-    }
-    //This method is used to execute the request and getting the response in completion block and error in error block
-    //Request Generator
-    fileprivate func javaUrlRequestPost(httpMethod: HTTPMethod, path: String, parameterSet: [String: Any]!, cache: Bool)
-        -> URLRequest {
-            var parameters = [String: Any]()
-            if parameterSet != nil {
-                parameters = parameterSet
-            }
-            let baseUrl: String!
-            if apiOwner == .contus {
-                baseUrl = BASEURL + path
-            } else {
-                baseUrl = path
-            }
-            apiOwner = Api.contus
-            debugPrint("API ==>> ", baseUrl!)
-            debugPrint("parameters ==>> ", parameters)
-            let url = URL(string: baseUrl)!
-            var urlRequest: URLRequest!
-            if cache {
-                urlRequest = URLRequest(url: url,
-                                        cachePolicy: .returnCacheDataElseLoad,
-                                        timeoutInterval: requestTimeout)
-            } else {
-                urlRequest = URLRequest(url: url,
-                                        cachePolicy: .reloadIgnoringLocalCacheData,
-                                        timeoutInterval: requestTimeout)
-            }
-            ///cache contol parameters
-            //            parameters["Cache-Control"] = CacheControl.publicControl
-            var postData = Data()
-            do {
-                postData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-            } catch {
-            }
-            print(postData)
-            urlRequest.httpMethod = httpMethod.rawValue
-            urlRequest.allHTTPHeaderFields = self.httpHeader(path: path)
-            urlRequest.httpBody = postData as Data
-            return urlRequest
-    }
-}
-extension CSApiHttpRequest {
-    /// Video Thumb Upload Image
-    ///
-    /// - Parameters:
-    ///   - path: url path to which video need to be upload
-    ///   - profileImage: send UIImage to be Upload
-    ///   - parameter: dictinoary values that need to sent to url
-    ///   - completion: responce result handler
-    ///   - errorOccured: error responce handler
-    func multiPartImageUpLoad(path: String,
-                              profileImage: [String: UIImage]?,
-                              parameter: [String: Any]!,
-                              completion: @escaping (_ response: AnyObject) -> Void,
-                              errorOccured: @escaping (_ error: NSError?) -> Void) {
-        // setting network activity Indicator to visible
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        // call Api bu alamofire library Base URL is default Url and append Url is the method or action used in api call
-        let alamofireSession = Alamofire.SessionManager.default
-        let baseUrl = BASEURL + path
-        alamofireSession.session.configuration.timeoutIntervalForRequest = requestTimeout
-        alamofireSession.upload(multipartFormData: { multipartFormData in
-            for (key, value) in parameter {
-                multipartFormData.append(((value) as? String)!.data(using: .utf8)!, withName: key)
-            }
-            for (key, value) in profileImage! {
-                multipartFormData.append(value.jpegData(compressionQuality: 0.5)!,
-                                         withName: key,
-                                         fileName: "image.jpeg",
-                                         mimeType: "image/jpeg")
-            }
-        }, to: baseUrl,
-           method: .post,
-           headers: self.httpHeader(path: path),
-           encodingCompletion: { (result) in
-            // setting network activity Indicator to hide
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            switch result {
-            case .success(let upload, _, _):
-                upload.uploadProgress(closure: { (progress) in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                })
-                upload.responseJSON { response in
-                    // send to completion block
-                    completion(response.data as AnyObject? ?? NSData())
-                }
-            case .failure(let encodingError):
-                // sending to failure block
-                errorOccured(encodingError as NSError?)
-            }
-        })
     }
 }
