@@ -1,11 +1,10 @@
 /*
- * CSBaseTableViewCell
+ * VideoDetailViewController
  * This class  is used as a base tableview cell for all tableviewcell class
- * @category   Daimler
- * @package    com.contus.Daimler
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2018 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 class ParentTableViewCell: UITableViewCell {

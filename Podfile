@@ -10,10 +10,6 @@ target 'HOOQ_Task_Sowrirajan' do
   pod 'ObjectMapper', '3.3.0'
   # [END Mapper_pod]
   
-  # [START NVActivityIndicatorView_pod]
-  pod 'NVActivityIndicatorView'
-  # [END NVActivityIndicatorView_pod]
-  
   # [START Alamofire_pod]
   pod 'Alamofire', '~> 4.5'
   # [END Alamofire_pod]

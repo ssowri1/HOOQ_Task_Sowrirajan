@@ -1,11 +1,10 @@
 /*
- * CSNotificationListApiModel
- * This class is used to show the Videos feed list.
- * @category   com.daimler.daimlerbus
- * @package    com.daimler.daimlerbus
+ * CSVideoListModel
+ * This class is used for handling service call back requests.
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2019 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 import ObjectMapper
@@ -16,13 +15,13 @@ class CSVideoListModel: NSObject {
     //   - parentView: Any object
     //   - parameters
     class func getVideoFeeds(parent: AnyObject,
-                             parameters: [String: Any],
+                             pageNo: String,
                              completionHandler: @escaping (_ response: VideoFeedListApiModel) -> Void) {
         let parentViewController = parent as? ParentViewController
         parentViewController?.startAnimate()
-        let path = "movie/now_playing?api_key=2a05877de88d08b90c4fed3cf806ca35"
+        let path = "movie/now_playing?api_key=2a05877de88d08b90c4fed3cf806ca35" + "&page=\(pageNo)"
         CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .get,
-                                                                 path: path, parameters: parameters,
+                                                                 path: path, parameters: [:],
                                                                  completionHandler: { (response) in
                                                                     parentViewController?.stopAnimate()
                                                                     let content = String(data: (response as? Data)!, encoding: String.Encoding.utf8)
@@ -45,13 +44,13 @@ class CSVideoListModel: NSObject {
     //   - parentView: Any object
     //   - parameters
     class func getSimilarVideodetails(parent: AnyObject,
-                               parameters: [String: Any],
+                               pageNo: Int,
                                completionHandler: @escaping (_ response: VideoFeedListApiModel) -> Void) {
         let parentViewController = parent as? ParentViewController
         parentViewController?.startAnimate()
-        let path = VIDEODETAIL
-        CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .post,
-                                                                 path: path, parameters: parameters,
+        let path = VIDEODETAIL + "&page=\(pageNo)"
+        CSApiHttpRequest.sharedInstance.executeRequestWithMethod(httpMethod: .get,
+                                                                 path: path, parameters: [:],
                                                                  completionHandler: { (response) in
                                                                     parentViewController?.stopAnimate()
                                                                     let content = String(data: (response as? Data)!, encoding: String.Encoding.utf8)

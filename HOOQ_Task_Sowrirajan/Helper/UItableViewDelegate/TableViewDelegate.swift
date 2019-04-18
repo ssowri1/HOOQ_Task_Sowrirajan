@@ -1,11 +1,10 @@
 /*
- * CSTableViewDelegate
+ * VideoDetailViewController
  * This class  is used as a delegate class for all the tableview class
- * @category   EnergyLife
- * @package    com.contus.EnergyLife
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2017 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 @objc protocol ParentTableViewDelegate: class {

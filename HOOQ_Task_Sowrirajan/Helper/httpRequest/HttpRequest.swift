@@ -1,11 +1,10 @@
 /*
- CSApiHttpRequest.swift
- *  This extension class is used for CSApiHttpRequest Details
- * @category   Daimler
- * @package    com.contus.Daimler
+ * VideoDetailViewController
+ *  This class is used for CSApiHttpRequest Details
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2018 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 import Alamofire
@@ -81,7 +80,7 @@ class CSApiHttpRequest: NSObject {
     //This method is used to return the static http header
     fileprivate func httpHeader(path: String) -> [String: String] {
         //Custom headers
-        var header: [String: String] = [
+        let header: [String: String] = [
             "Login-Type": "Mobile",
             "content-type": "application/json"
         ]

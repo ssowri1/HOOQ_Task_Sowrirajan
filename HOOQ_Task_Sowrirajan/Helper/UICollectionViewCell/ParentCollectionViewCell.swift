@@ -1,11 +1,10 @@
 /*
- * CSVideosCollectionViewCell.swift
+ * VideoDetailViewController
  * This class is used to base class of all collection view cell
- * @category   Daimler
- * @package    com.contus.Daimler
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2019 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 class ParentCollectionViewCell: UICollectionViewCell {

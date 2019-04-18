@@ -1,30 +1,31 @@
 /*
- * CSListingViewController.swift
- * This class is used to configure the Video listing page
- * @category   Daimler
- * @package    com.contus.Daimler
+ * VideoListingViewController
+ * This class is used for handling video detail page.
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2019 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 import SDWebImage
 class VideoListingViewController: ParentViewController {
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tabelView: UITableView!
-    /// Use to store offset values
-    var storedOffsets = [Int: CGFloat]()
     @IBOutlet var videoDataSource: VideoListDataSource!
-    var timer = Timer()
-    var offSet: CGFloat = 0
+    /// Video list array
     var feeds = [VideoFeeds]()
-    var selecedIndex: Int?
-    private let bannerImages = ["Banner1", "Banner2", "Banner3", "Banner4"]
+    /// Page index
+    fileprivate var pageIndex: Int = 1
+    /// Last Page Index
+    fileprivate var lastPageIndex = 1
+    /// Pull to refresh declaration
+    var refreshManager: PullToRefreshManager!
+    /// Pagination manger declaration
+    var paginatioManager: PaginationManager!
     /// view life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSize(width: bannerImages.count * Int(self.view.frame.size.width), height: 0)
         callApi()
+        registerRefreshIndicator()
         configureVideoListTableView()
     }
     override func callApi() {
@@ -32,58 +33,18 @@ class VideoListingViewController: ParentViewController {
     }
     func getFeeds() {
         CSVideoListModel.getVideoFeeds(parent: self,
-                                       parameters: [:]) { (response) in
-                                        self.feeds = response.results
+                                       pageNo: "\(pageIndex)") { (response) in
+                                        self.feeds += response.results
+                                        self.lastPageIndex = response.total_pages
                                         DispatchQueue.main.async {
                                             self.configureVideoListTableView()
                                         }
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        autoScroll()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        allocateScrollView()
-        timer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        timer.invalidate()
-    }
     func configureVideoListTableView() {
         videoDataSource.delegate = self
         videoDataSource.videoLists = self.feeds
         self.tabelView.reloadData()
-    }
-    func allocateScrollView() {
-        for (index, item) in bannerImages.enumerated() {
-            let containerView = UIView(frame: CGRect(x: index * Int(WIDTH), y: 0, width: Int(WIDTH),
-                                                     height: Int(scrollView.frame.size.height)))
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Int(containerView.frame.size.width),
-                                                      height: Int(containerView.frame.size.height)))
-            imageView.image = UIImage.init(named: item)
-            imageView.contentMode = .scaleToFill
-            let button = UIButton(frame: CGRect(x: 10,
-                                                y: Int((containerView.frame.size.height)-50),
-                                                width: 40,
-                                                height: 40))
-            button.setImage(UIImage.init(named: "play"), for: .normal)
-            containerView.addSubview(imageView)
-            containerView.addSubview(button)
-            scrollView.addSubview(containerView)
-        }
-    }
-    @objc func autoScroll() {
-        let totalPossibleOffset = CGFloat(bannerImages.count - 1) * WIDTH
-        if offSet == totalPossibleOffset {
-            offSet = 0 // come back to the first image after the last image
-        } else {
-            offSet += WIDTH
-        }
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {
-                self.scrollView.contentOffset.x = CGFloat(self.offSet)
-            }, completion: nil)
-        }
     }
     /// Custom methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,7 +52,7 @@ class VideoListingViewController: ParentViewController {
             let tag = sender as? Int
             let feed = feeds[tag!]
             let controller = segue.destination as? VideoDetailViewController
-            controller?.movieeTitle = feed.title ?? "sdscsd"
+            controller?.movieeTitle = feed.title ?? ""
             controller?.posterPath = feed.poster_path
             controller?.movieeDescription = feed.overview
             controller?.year = feed.release_date
@@ -100,11 +61,53 @@ class VideoListingViewController: ParentViewController {
         }
     }
     deinit {
-        print("CSListingViewController is deallocated")
+        print("VideoListingViewController is deallocated")
+    }
+    /// register Refresh controller adding
+    func registerRefreshIndicator() {
+        // If you want to use Pull To Refresh
+        self.refreshManager = PullToRefreshManager(scrollView: self.tabelView,
+                                                   delegate: self)
+        self.refreshManager.updateActivityIndicatorStyle(.white)
+        self.refreshManager.updateActivityIndicatorColor(UIColor.black)
+        // If you want to use Pagination
+        self.paginatioManager = PaginationManager(scrollView: self.tabelView,
+                                                  delegate: self)
+        self.paginatioManager.updateActivityIndicatorColor(UIColor.black)
     }
 }
 extension VideoListingViewController: ParentTableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "listtodetail", sender: indexPath.row)
+    }
+}
+// MARK: - Pull to Refresh
+extension VideoListingViewController: PullToRefreshManagerDelegate {
+    public func pullToRefreshManagerDidStartLoading(_ controller: PullToRefreshManager,
+                                                    onCompletion: @escaping () -> Void) {
+        let delayTime = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { () -> Void in
+            onCompletion()
+            self.callApi()
+        }
+    }
+}
+// MARK: - vertical pagenation for
+extension VideoListingViewController: PaginationManagerDelegate {
+    public func paginationManagerDidStartLoading(_ controller: PaginationManager,
+                                                 onCompletion: @escaping () -> Void) {
+        let delayTime = DispatchTime.now() + 2
+        DispatchQueue.main.asyncAfter(deadline: delayTime) { () -> Void in
+            onCompletion()
+            self.callApi()
+        }
+    }
+    public func paginationManagerShouldStartLoading(_ controller: PaginationManager) ->
+        Bool {
+            pageIndex  += 1
+            if pageIndex > self.lastPageIndex {
+                return false
+            }
+            return true
     }
 }

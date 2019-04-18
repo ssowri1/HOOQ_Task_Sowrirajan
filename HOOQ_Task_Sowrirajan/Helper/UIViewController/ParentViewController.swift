@@ -1,11 +1,11 @@
-//
-//  ParentViewController.swift
-//  HOOQ_Task_Sowrirajan
-//
-//  Created by user on 16/04/19.
-//  Copyright © 2019 user. All rights reserved.
-//
-
+/*
+ * VideoDetailViewController
+ *  This class is parent view controller for enter view controller
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
+ * @version    1.0
+ * @author     ssowri1@gmail.com
+ */
 import UIKit
 class ParentViewController: UIViewController {
     let loaderVw = Loader()
@@ -54,40 +54,6 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: completion)
     }
-    /// Shows alert with action for ok button
-    /// - Parameters:
-    ///   - title: Title to show on alert
-    ///   - message: Message to show on alert
-    ///   - actionHandler: handler function to perform
-    func showAlertWithTitle(title: String?, message: String?, actionHandler: @escaping (UIAlertAction) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: actionHandler))
-        self.present(alert, animated: true, completion: nil)
-    }
-    /// Shows the alert with alert action
-    /// - Parameters:
-    ///   - title: Title to show on alert
-    ///   - message: Message to show on alert
-    ///   - actions: actions for items in alert
-    func showAlertWithTitle(title: String?, message: String?, actions: [UIAlertAction]) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        for action in actions {
-            alert.addAction(action)
-        }
-        self.present(alert, animated: true, completion: nil)
-    }
-    /// - Email Validation Function
-    /// - emailString: The String which the user has entered for email
-    func isValidEmail(emailString: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-        if emailTest.evaluate(with: emailString) {
-            return true
-        } else {
-            self.showAlertWithTitle(title: "", message: "Please Enter Valid Email ID !")
-            return false
-        }
-    }
     /// Hide the Keyboard When User tab the View
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
@@ -99,4 +65,3 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
-

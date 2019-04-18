@@ -1,11 +1,10 @@
 /*
- * PopSegue
+ * VideoDetailViewController
  * This class  is used as Custom segue for PopViewcontrolle
- * @category   Daimler
- * @package    com.contus.Daimler
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2017 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 class PopSegue: UIStoryboardSegue {

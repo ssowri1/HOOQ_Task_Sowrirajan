@@ -1,10 +1,11 @@
-//
-//  Loader.swift
-//  testAnimateLoader
-//
-//  Created by user on 28/01/19.
-//  Copyright © 2019 user. All rights reserved.
-//
+/*
+ * VideoDetailViewController
+ * This class  is used as custom loader of UIView
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
+ * @version    1.0
+ * @author     ssowri1@gmail.com
+ */
 import UIKit
 class Loader: UIView {
     @IBOutlet weak var contentView: UIView!

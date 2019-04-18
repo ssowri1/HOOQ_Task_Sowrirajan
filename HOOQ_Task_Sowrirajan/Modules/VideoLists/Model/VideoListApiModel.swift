@@ -1,11 +1,10 @@
 /*
- * CSNotificationListApiModel
- * This class is used to show the Videos feed list.
- * @category   com.daimler.daimlerbus
- * @package    com.daimler.daimlerbus
+ * VideoFeedListApiModel
+ * This class is used for handling api models.
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
  * @version    1.0
- * @author     Contus Team <developers@contus.in>
- * @copyright  Copyright (C) 2019 Contus. All rights reserved.
+ * @author     ssowri1@gmail.com
  */
 import UIKit
 import ObjectMapper
@@ -14,7 +13,7 @@ class VideoFeedListApiModel: Mappable {
     var page: Int!
     var total_results: Int!
     var dates: VideoDates?
-    var total_pages = [CSVideoDetails]()
+    var total_pages: Int!
     required init?(map: Map) {
     }
     func mapping(map: Map) {
@@ -50,6 +49,6 @@ class VideoFeeds: Mappable {
         overview <- map["overview"]
         poster_path <- map["poster_path"]
         release_date <- map["release_date"]
-        vote_average <- map["vote_average"]
+        rating <- map["vote_average"]
     }
 }

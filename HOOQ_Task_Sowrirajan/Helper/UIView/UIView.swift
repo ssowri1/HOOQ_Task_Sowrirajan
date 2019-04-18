@@ -1,11 +1,11 @@
-//
-//  UIView.swift
-//  HOOQ_Task_Sowrirajan
-//
-//  Created by user on 16/04/19.
-//  Copyright © 2019 user. All rights reserved.
-//
-
+/*
+ * VideoDetailViewController
+ * This class  is used as extension of UIView
+ * @category   Entertainment
+ * @package    com.ssowri1.HOOQ-Task-Sowrirajan
+ * @version    1.0
+ * @author     ssowri1@gmail.com
+ */
 import UIKit
 /// Spin animation
 extension UIView {
